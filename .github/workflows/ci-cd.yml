@@ -19,16 +19,17 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.sakshikiran }}  # Your Docker Hub username
-          password: ${{ secrets.Sakshikiran@23 }}  # Your Docker Hub password
+          username: ${{ secrets.DOCKER_USERNAME }}  # This will use your secret
+          password: ${{ secrets.DOCKER_PASSWORD }}  # This will use your secret
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: sakshikiran/cicd-web-app:latest
+          tags: sakshikiran/cicd-web-app:latest  # Your Docker Hub username
 
-      #- name: Deploy to Server
-        #run: |
-         # ssh username@your-server-ip "docker pull sakshikiran/cicd-web-app:latest && docker run -d -p 3001:80 sakshikiran/cicd-web-app:latest"
+      # The Deploy to Server step can be commented out for now
+      # - name: Deploy to Server
+      #   run: |
+      #     ssh your-actual-username@your-server-ip "docker pull sakshikiran/cicd-web-app:latest && docker run -d -p 3001:80 sakshikiran/cicd-web-app:latest"
